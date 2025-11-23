@@ -1,0 +1,7 @@
+{
+  "name": "dbz-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
