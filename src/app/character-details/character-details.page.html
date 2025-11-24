@@ -1,0 +1,125 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes do Personagem</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  @if (loading) {
+    <div class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Carregando detalhes...</p>
+    </div>
+  }
+
+  @if (error) {
+    <ion-card color="danger">
+      <ion-card-content>
+        Erro ao carregar detalhes: {{ error }}
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block" (click)="goBack()">
+      Voltar
+    </ion-button>
+  }
+
+  @if (character && !loading) {
+    <div class="character-details">
+      <ion-card appGlow="#FFD700" class="details-card">
+
+        <div class="character-header">
+          <img 
+            [src]="character.image"
+            [alt]="character.name"
+            class="detail-image">
+          
+          <div class="header-info">
+            <h1>{{ character.name | uppercase }}</h1>
+
+            <ion-chip [color]="getRaceColor(character.race)">
+              {{ character.race }}
+            </ion-chip>
+
+            <ion-chip>
+              {{ character.gender | lowercase }}
+            </ion-chip>
+          </div>
+        </div>
+
+        <ion-card-content>
+
+          <ion-grid>
+            <ion-row>
+
+              <ion-col size="12" size-md="6">
+                <h3>Estatísticas de Poder</h3>
+
+                <ion-list>
+
+                  <ion-item>
+                    <ion-label>KI Atual</ion-label>
+                    <ion-text color="primary">
+                      {{ character.ki || 'Desconhecido' }}
+                    </ion-text>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>KI Máximo</ion-label>
+                    <ion-text color="danger">
+                      {{ character.maxKi || 'Desconhecido' }}
+                    </ion-text>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Nível de Batalha</ion-label>
+                    <ion-text [color]="getPowerLevelColor(character.ki)">
+                      {{ character.ki | powerLevel }}
+                    </ion-text>
+                  </ion-item>
+
+                </ion-list>
+              </ion-col>
+
+              <ion-col size="12" size-md="6">
+                <h3>Informações</h3>
+
+                <ion-list>
+
+                  <ion-item>
+                    <ion-label>Afiliação</ion-label>
+                    <ion-text>
+                      {{ character.affiliation || 'Desconhecida' }}
+                    </ion-text>
+                  </ion-item>
+
+                  @if (character.description) {
+                    <ion-item>
+                      <ion-label>Descrição</ion-label>
+                      <ion-text class="description-text">
+                        {{ character.description }}
+                      </ion-text>
+                    </ion-item>
+                  }
+
+                </ion-list>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+          <div class="actions">
+            <ion-button expand="block" (click)="goBack()" color="medium">
+              Voltar para Lista
+            </ion-button>
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  }
+
+</ion-content>
