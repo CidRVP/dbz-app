@@ -24,12 +24,12 @@
 }
 
 .detail-image {
-  width: 200px; // Aumentei o tamanho
+  width: 200px;
   height: 200px;
-  border-radius: 10px; // Mudei para cantos arredondados em vez de círculo
-  object-fit: contain; // Mudei de 'cover' para 'contain' para mostrar imagem completa
+  border-radius: 10px;
+  object-fit: contain;
   border: 5px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.1); // Fundo para imagens transparentes
+  background-color: rgba(255, 255, 255, 0.1);
   margin-bottom: 16px;
 
   @media (min-width: 768px) {
